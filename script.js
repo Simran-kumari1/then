@@ -1,19 +1,16 @@
-async function getQuote() {
+let button = document.getElementById("btn");
 
+button.addEventListener("click", async function () {
     try {
-        const response = await fetch(
-            "https://dummyjson.com/quotes/random"
-        );
+        let response = await fetch("https://dummyjson.com/quotes/random");
 
-        const data = await response.json();
+        let data = await response.json();
 
+        document.getElementById("quote").innerText = data.quote;
+        document.getElementById("author").innerText = "- " + data.author;
+    } 
+    catch (error) {
         document.getElementById("quote").innerText =
-            '"' + data.quote + '"';
-
-        document.getElementById("author").innerText =
-            "- " + data.author;
-
-    } catch (error) {
-        console.log(error);
+            "Something went wrong. Try again.";
     }
-}
+});
